@@ -1,0 +1,23 @@
+.channel-container {
+  width: 100%;
+  /* display: flex;
+  justify-content: center; */
+}
+
+.channel-list {
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 95%;
+  transition: all 400ms ease-out;
+  background-color: white;
+  margin: 5px 7px 5px 7px;
+  border-radius: 5px;
+}
+
+
+.channel-list:hover {
+  background-color: #008DDA;
+  /* background-color: rgb(206, 206, 206); */
+}

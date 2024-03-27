@@ -1,0 +1,9 @@
+.home {
+  width: 100vw;
+  height: 100vh;
+}
+
+.sider {
+  box-shadow: 9px 3px 5px -8px black;
+  height: 100vh;
+}
