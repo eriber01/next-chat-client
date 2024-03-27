@@ -14,9 +14,9 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.form {
+.forms {
   text-align: center;
-  width: 300px;
+  width: 400px;
   max-width: 350px;
 }
 
@@ -24,6 +24,33 @@
   outline: none;
 }
 
+.card {
+  perspective: 1000px;
+  text-align: center;
+  width: 450px;
+  max-width: 500px;
+}
+
+.login, .register {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  transition: transform 0.5s;
+}
+
+.login {
+  background-color: #f0f0f0;
+}
+
+.register {
+  background-color: #ccc;
+  transform: rotateY(180deg);
+}
+
+.show-back {
+  transform: rotateY(180deg);
+}
 
 @media (width <= 450px) {
   .form {

@@ -9,7 +9,7 @@ export const LoginForm = () => {
   return (
     <div className={style['form-container']}>
       <Form
-        className={style.form}
+        className={style.forms}
         name="login"
         autoComplete="on"
         layout="vertical"

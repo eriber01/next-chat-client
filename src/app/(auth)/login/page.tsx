@@ -9,8 +9,14 @@ export default function Login() {
   const [isLogin, setIsLogin] = useState(true)
   return (
     <div className={style['container']}>
-      <LoginForm />
-      <RegisterForm />
+      <div className={`${style.card} ${isLogin ? '' : style['show-back']}`}>
+        <div className={style.login}>
+          <LoginForm />
+        </div>
+        <div className={style.register}>
+          <RegisterForm />
+        </div>
+      </div>
     </div>
   )
 }
