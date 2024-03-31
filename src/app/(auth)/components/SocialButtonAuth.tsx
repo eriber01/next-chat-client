@@ -1,7 +1,7 @@
 import { GithubOutlined, GoogleOutlined } from '@ant-design/icons'
 import { Button, Form, Space, Typography } from 'antd'
+import { signIn } from 'next-auth/react'
 import React from 'react'
-import style from '../auth.module.css'
 const SocialButtonAuth = () => {
   return (
     <div>
@@ -12,10 +12,18 @@ const SocialButtonAuth = () => {
       </Form.Item>
       <Form.Item style={{ marginBottom: 0 }}>
         <Space style={{ margin: '5px' }}>
-          <Button icon={<GoogleOutlined />} shape="circle" />
+          <Button
+            onClick={() => signIn('google', { callbackUrl: '/' })}
+            icon={<GoogleOutlined />}
+            shape="circle"
+          />
         </Space>
         <Space style={{ margin: '5px' }}>
-          <Button icon={<GithubOutlined />} shape="circle" />
+          <Button
+            onClick={() => signIn('github', { callbackUrl: '/' })}
+            icon={<GithubOutlined />}
+            shape="circle"
+          />
         </Space>
       </Form.Item>
     </div>

@@ -1,29 +1,38 @@
-import { Avatar, Button, Popconfirm, message } from 'antd'
+import { Avatar, Button, Popconfirm } from 'antd'
 import { PoweroffOutlined } from "@ant-design/icons";
+import { UserOutlined } from '@ant-design/icons';
 import style from "./user.module.css";
+import { signOut } from "next-auth/react";
+import { UserI } from '../../interface';
 
-const confirm = () => {
-  message.success('Click on Yes');
+const singOut = () => {
+  signOut()
 };
 
-const cancel = () => {
-  message.error('Click on No');
-};
+const User = ({ user }: { user: UserI }) => {
+  console.log(user);
+  console.log(user?.image);
 
-const User = () => {
   return (
     <div className={style['user-container']}>
-      <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-      <label>
-        Eriber Tejeda
-      </label>
+      <div className={style['user-info']}>
+        <div style={{paddingRight: '5px'}}>
+          {
+            user?.image ?
+              <Avatar src={user?.image} /> :
+              <Avatar icon={<UserOutlined />} />
+          }
+        </div>
+        <label>
+          {user?.name}
+        </label>
+      </div>
       <Popconfirm
         title='Logout'
         description='Be sure to Close Session'
-        onCancel={cancel}
-        onConfirm={confirm}
+        onConfirm={singOut}
         okText='Yes'
-        cancelText='Not'
+        cancelText='No'
       >
         <Button
           type='primary'

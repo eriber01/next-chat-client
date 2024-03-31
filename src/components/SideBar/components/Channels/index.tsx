@@ -1,6 +1,8 @@
+'use client'
 
-import { Avatar, List } from "antd";
+import { Avatar, List, Typography } from "antd";
 import style from "./channel.module.css";
+import { useSession } from "next-auth/react";
 
 const data = [
   {
@@ -22,6 +24,7 @@ const data = [
 ];
 
 const Channels = () => {
+
   return (
     <div>
       <List
@@ -38,7 +41,14 @@ const Channels = () => {
                 />
               }
               title={<span>{item.title}</span>}
-              description={<span>{item.message}</span>}
+              description={
+                <Typography.Text
+                  ellipsis={{ suffix: '' }}
+                >
+                  {item.message}
+                </Typography.Text>
+              }
+            // description={<span>{item.message}</span>}
             />
           </List.Item>
         )}

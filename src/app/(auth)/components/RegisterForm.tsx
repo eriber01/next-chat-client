@@ -4,8 +4,9 @@ import { Button, Form, Input, Typography } from 'antd'
 import style from '../auth.module.css'
 import CustomRequired from './CustomRequired'
 import SocialButtonAuth from './SocialButtonAuth'
+import { PropsForms } from '../interface'
 
-export const RegisterForm = () => {
+export const RegisterForm = ({ toggle }: PropsForms) => {
   return (
     <div className={style['form-container']}>
       <Form
@@ -80,7 +81,7 @@ export const RegisterForm = () => {
           <Button
             style={{ padding: 0 }}
             type="link"
-            onClick={() => alert('hola')}
+            onClick={() => toggle()}
           >
             You have account? Login.
           </Button>

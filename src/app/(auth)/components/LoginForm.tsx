@@ -4,8 +4,11 @@ import { Button, Form, Input, Typography } from 'antd'
 import style from '../auth.module.css'
 import CustomRequired from './CustomRequired'
 import SocialButtonAuth from './SocialButtonAuth'
+import { PropsForms } from '../interface'
+import { Authentication } from '../utils'
 
-export const LoginForm = () => {
+export const LoginForm = ({ toggle }: PropsForms) => {
+
   return (
     <div className={style['form-container']}>
       <Form
@@ -14,7 +17,7 @@ export const LoginForm = () => {
         autoComplete="on"
         layout="vertical"
         requiredMark={CustomRequired}
-        onValuesChange={(value) => console.log(value)}
+        onFinish={(values) => Authentication(values, 'login')}
       >
         <Form.Item>
           <Typography.Title level={2}>
@@ -56,7 +59,7 @@ export const LoginForm = () => {
           <Button
             style={{ padding: 0 }}
             type="link"
-            onClick={() => alert('hola')}
+            onClick={() => toggle()}
           >
             Not have account? Register.
           </Button>
@@ -66,6 +69,7 @@ export const LoginForm = () => {
           <Button
             type="primary"
             size="middle"
+            htmlType='submit'
           >
             Login
           </Button>

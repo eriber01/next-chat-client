@@ -5,10 +5,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  perspective: 2000px;
 }
 
 .form-container {
-  /* border: rgba(0, 0, 0, 0.349) 1px solid; */
   border-radius: 10px;
   padding: 50px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -20,40 +20,28 @@
   max-width: 350px;
 }
 
-.button {
-  outline: none;
+.container.rotate .card {
+  transform: rotateY(-180deg);
 }
 
 .card {
-  perspective: 1000px;
-  text-align: center;
-  width: 450px;
-  max-width: 500px;
+  transition: transform 800ms;
+  transform-style: preserve-3d;
+  position: relative;
 }
 
-.login, .register {
-  width: 100%;
-  height: 100%;
-  position: absolute;
+.login-form {
   backface-visibility: hidden;
-  transition: transform 0.5s;
+  position: absolute;
 }
 
-.login {
-  background-color: #f0f0f0;
-}
-
-.register {
-  background-color: #ccc;
+.register-form {
   transform: rotateY(180deg);
+  backface-visibility: hidden;
 }
 
-.show-back {
-  transform: rotateY(180deg);
-}
-
-@media (width <= 450px) {
-  .form {
+@media (width <=450px) {
+  .forms {
     width: 250px;
     max-width: 300px;
   }
