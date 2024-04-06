@@ -1,13 +1,39 @@
 'use client'
 
-import { Button, Form, Input, Typography } from 'antd'
+import { Button, Form, Input, Typography, notification } from 'antd'
 import style from '../auth.module.css'
 import CustomRequired from './CustomRequired'
 import SocialButtonAuth from './SocialButtonAuth'
-import { PropsForms } from '../interface'
+import { LoginI, PropsForms } from '../interface'
 import { Authentication } from '../utils'
+import AuthNotifications from './AuthNotifications'
+import { useRouter } from 'next/navigation'
 
 export const LoginForm = ({ toggle }: PropsForms) => {
+  const router = useRouter()
+
+  // const url = new URLSearchParams(window.location.search)
+  // console.log(url.get('error'));
+
+  // if (url.get('error')) {
+  //   console.log('entro');
+
+  //   const error = url.get('error')
+  //   AuthNotifications({ message: error!, status: 'error' })
+  //   router.push('/login')
+  // }
+
+  const useLogin = async (values: LoginI) => {
+    const auth = await Authentication(values, 'login')
+
+    if (!auth?.ok) {
+      AuthNotifications({ message: auth?.error!, status: 'error' })
+      return
+    }
+
+    router.push('/')
+
+  }
 
   return (
     <div className={style['form-container']}>
@@ -17,7 +43,7 @@ export const LoginForm = ({ toggle }: PropsForms) => {
         autoComplete="on"
         layout="vertical"
         requiredMark={CustomRequired}
-        onFinish={(values) => Authentication(values, 'login')}
+        onFinish={useLogin}
       >
         <Form.Item>
           <Typography.Title level={2}>
@@ -74,9 +100,9 @@ export const LoginForm = ({ toggle }: PropsForms) => {
             Login
           </Button>
         </Form.Item>
-
         <SocialButtonAuth />
       </Form>
+
     </div>
   )
 }

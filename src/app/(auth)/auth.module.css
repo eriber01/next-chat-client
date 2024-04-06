@@ -1,5 +1,5 @@
 .container {
-  width: 100vw;
+  /* width: 100vw; */
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
 
 .form-container {
   border-radius: 10px;
-  padding: 50px;
+  padding: 20px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
@@ -25,6 +25,12 @@
 }
 
 .card {
+  /* height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   transition: transform 800ms;
   transform-style: preserve-3d;
   position: relative;

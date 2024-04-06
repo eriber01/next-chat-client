@@ -1,29 +1,47 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import style from '../auth.module.css'
 
 import { LoginForm } from "../components/LoginForm";
 import { RegisterForm } from '../components/RegisterForm';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import Provider from '@/app/Providers';
 
 export default function Login() {
-  const [isLogin, setIsLogin] = useState(false)
+  const [state, setState] = useState({ isLogin: false, isAuthenticate: false })
+  const { data: session } = useSession()
+  const router = useRouter()
 
   const toggle = () => {
-    setIsLogin(!isLogin)
+    setState({ ...state, isLogin: !state.isLogin })
   }
 
-  console.log(isLogin);
+
+  useEffect(() => {
+    if (session?.user) {
+      setState(prev => ({
+        ...prev,
+        isAuthenticate: true
+      }))
+
+      router.push('/')
+    }
+  }, [router, session])
+
 
   return (
-    <div className={`${style['container']} ${isLogin ? style.rotate : ''}`}>
-      <div className={style.card}>
-        <div className={`${style['login-form']}`}>
-          <LoginForm toggle={toggle} />
-        </div>
-        <div className={style['register-form']}>
-          <RegisterForm toggle={toggle} />
+    <Provider>
+      <div className={`${style['container']} ${state.isLogin ? style.rotate : ''}`}>
+        <div className={style.card}>
+          <div className={`${style['login-form']}`}>
+            <LoginForm toggle={toggle} />
+          </div>
+          <div className={style['register-form']}>
+            <RegisterForm toggle={toggle} />
+          </div>
         </div>
       </div>
-    </div>
+    </Provider>
   )
 }

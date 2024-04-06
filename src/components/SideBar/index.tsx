@@ -1,11 +1,17 @@
+'use client'
 import { Layout } from "antd"
 import User from "./components/User";
 import Channels from "./components/Channels";
-import { useSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 const { Header, Content, Footer } = Layout;
 
 export const SideBar = () => {
   const { data: session, status } = useSession()
+  const router = useRouter()
+  console.log(session, session);
+
 
   return (
     <Layout style={{ height: '100%' }}>

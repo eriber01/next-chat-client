@@ -4,9 +4,25 @@ import { Button, Form, Input, Typography } from 'antd'
 import style from '../auth.module.css'
 import CustomRequired from './CustomRequired'
 import SocialButtonAuth from './SocialButtonAuth'
-import { PropsForms } from '../interface'
+import { PropsForms, RegisterI } from '../interface'
+import { useRouter } from 'next/navigation'
+import { Authentication } from '../utils'
+import AuthNotifications from './AuthNotifications'
 
 export const RegisterForm = ({ toggle }: PropsForms) => {
+  const router = useRouter()
+  const useRegister = async (values: RegisterI) => {
+    const auth = await Authentication(values, 'register')
+
+    if (!auth?.ok) {
+      AuthNotifications({ message: auth?.error!, status: 'error' })
+      return
+    }
+
+    router.push('/')
+
+  }
+
   return (
     <div className={style['form-container']}>
       <Form
@@ -15,7 +31,7 @@ export const RegisterForm = ({ toggle }: PropsForms) => {
         autoComplete="on"
         layout="vertical"
         requiredMark={CustomRequired}
-        onValuesChange={(value) => console.log(value)}
+        onFinish={useRegister}
       >
         <Form.Item>
           <Typography.Title level={2}>
@@ -38,7 +54,7 @@ export const RegisterForm = ({ toggle }: PropsForms) => {
         </Form.Item>
         <Form.Item
           label='Full name'
-          name='fullname'
+          name='name'
           required
           rules={[
             { required: true, message: 'Please enter your Full Name!' },
@@ -51,7 +67,7 @@ export const RegisterForm = ({ toggle }: PropsForms) => {
         </Form.Item>
         <Form.Item
           label='Nick'
-          name='nick'
+          name='nickName'
           required={false}
         >
           <Input
@@ -87,10 +103,13 @@ export const RegisterForm = ({ toggle }: PropsForms) => {
           </Button>
         </Form.Item>
 
-        <Form.Item>
+        <Form.Item
+          style={{ margin: 0 }}
+        >
           <Button
             type="primary"
             size="middle"
+            htmlType='submit'
           >
             Register
           </Button>

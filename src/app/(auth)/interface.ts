@@ -7,3 +7,11 @@ export interface LoginI {
   password: string
   type: string
 }
+
+export interface RegisterI {
+  email: string
+  name: string
+  password: string
+  nickName?: string
+  type: string
+}
